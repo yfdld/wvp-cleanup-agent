@@ -49,14 +49,14 @@ public class AgentConfig {
     }
 
     public static class CleanupConfig {
-        private int diskThreshold = 80;
+        private double diskThreshold = 80;
         private int checkInterval = 60;
         private int maxDeleteCount = 500;
         private int maxDbCleanCount = 100;
         private boolean cleanEmptyDirs = true;
 
-        public int getDiskThreshold() { return diskThreshold; }
-        public void setDiskThreshold(int diskThreshold) { this.diskThreshold = diskThreshold; }
+        public double getDiskThreshold() { return diskThreshold; }
+        public void setDiskThreshold(double diskThreshold) { this.diskThreshold = diskThreshold; }
         public int getCheckInterval() { return checkInterval; }
         public void setCheckInterval(int checkInterval) { this.checkInterval = checkInterval; }
         public int getMaxDeleteCount() { return maxDeleteCount; }
@@ -130,8 +130,8 @@ public class AgentConfig {
         if (config.zlm.host == null || config.zlm.host.isEmpty()) {
             throw new RuntimeException("agent.yml 中 zlm.host 未配置");
         }
-        if (config.cleanup.diskThreshold < 1 || config.cleanup.diskThreshold > 99) {
-            throw new RuntimeException("agent.yml 中 cleanup.diskThreshold 必须在 1-99 之间");
+        if (config.cleanup.diskThreshold < 1.0 || config.cleanup.diskThreshold >= 100.0) {
+            throw new RuntimeException("agent.yml 中 cleanup.diskThreshold 必须在 1-99.9 之间");
         }
         if (config.cleanup.checkInterval < 10) {
             throw new RuntimeException("agent.yml 中 cleanup.checkInterval 不能小于 10 秒");

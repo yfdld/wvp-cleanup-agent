@@ -26,14 +26,14 @@ public class CleanupEngine {
     private final DiskMonitor diskMonitor;
     private final WvpApiClient wvpClient;
     private final PendingStore pendingStore;
-    private final int diskThreshold;
+    private final double diskThreshold;
     private final int maxDeleteCount;
     private final int maxDbCleanCount;
     private final boolean cleanEmptyDirs;
 
     public CleanupEngine(PathGuard pathGuard, DiskMonitor diskMonitor,
                          WvpApiClient wvpClient, PendingStore pendingStore,
-                         int diskThreshold, int maxDeleteCount,
+                         double diskThreshold, int maxDeleteCount,
                          int maxDbCleanCount, boolean cleanEmptyDirs) {
         this.pathGuard = pathGuard;
         this.diskMonitor = diskMonitor;
@@ -53,7 +53,7 @@ public class CleanupEngine {
 
         double usagePercent = diskMonitor.getUsagePercent();
         result.diskUsageBefore = usagePercent;
-        logger.info("当前磁盘使用率: {}%, 阈值: {}%", String.format("%.1f", usagePercent), diskThreshold);
+        logger.info("当前磁盘使用率: {}%, 阈值: {}%", String.format("%.1f", usagePercent), String.format("%.1f", diskThreshold));
 
         if (usagePercent < 0) {
             logger.error("无法获取磁盘使用率，跳过本次清理");

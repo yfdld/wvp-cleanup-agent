@@ -178,7 +178,7 @@ systemctl start wvp-cleanup-agent
 | | `secret` | — | **必填**，ZLM API 密钥 |
 | | `retryInterval` | `10` | 启动连接失败重试间隔（秒） |
 | | `configRefreshInterval` | `600` | 运行时配置刷新间隔（秒） |
-| **cleanup** | `diskThreshold` | `80` | 磁盘使用率阈值（%） |
+| **cleanup** | `diskThreshold` | `80` | 磁盘使用率阈值（%），支持小数如 53.5 |
 | | `checkInterval` | `60` | 定时检查间隔（秒） |
 | | `maxDeleteCount` | `500` | 单次最大删除文件数 |
 | | `maxDbCleanCount` | `100` | 单次最大清理数据库记录数（孤儿记录上限） |
