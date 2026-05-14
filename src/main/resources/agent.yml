@@ -67,3 +67,5 @@ log:
   file: ./logs/agent.log
   # 日志保留天数
   maxHistory: 7
+  # 单个日志文件最大大小（MB），超过此大小自动滚动，默认 30MB
+  maxLogSize: 30
