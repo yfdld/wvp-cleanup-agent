@@ -190,6 +190,7 @@ systemctl start wvp-cleanup-agent
 | **log** | `level` | `INFO` | 日志级别 |
 | | `file` | `./logs/agent.log` | 日志文件路径 |
 | | `maxHistory` | `7` | 日志保留天数 |
+| | `maxLogSize` | `30` | 单个日志文件最大大小（MB），超过自动滚动 |
 
 ## WVP 侧接口说明
 

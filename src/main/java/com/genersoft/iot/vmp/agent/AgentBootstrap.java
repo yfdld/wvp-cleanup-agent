@@ -11,6 +11,8 @@ import com.genersoft.iot.vmp.agent.lifecycle.AgentLifecycle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+
 /**
  * WVP Cleanup Agent 主入口
  *
@@ -80,6 +82,13 @@ public class AgentBootstrap {
 
             // 创建 SizeAndTimeBasedRollingPolicy
             String logFile = config.getLog().getFile();
+
+            // 自动创建日志目录
+            File logDir = new File(logFile).getParentFile();
+            if (logDir != null && !logDir.exists()) {
+                logDir.mkdirs();
+            }
+
             String maxLogSize = config.getLog().getMaxLogSize() + "MB";
             SizeAndTimeBasedRollingPolicy rollingPolicy = new SizeAndTimeBasedRollingPolicy();
             rollingPolicy.setContext(context);
@@ -88,8 +97,6 @@ public class AgentBootstrap {
             rollingPolicy.setMaxHistory(config.getLog().getMaxHistory());
             rollingPolicy.setTotalSizeCap(FileSize.valueOf(
                     (long) config.getLog().getMaxLogSize() * config.getLog().getMaxHistory() + "MB"));
-            rollingPolicy.setParent(null);
-            rollingPolicy.start();
 
             // 创建 RollingFileAppender
             RollingFileAppender fileAppender = new RollingFileAppender();
@@ -98,7 +105,10 @@ public class AgentBootstrap {
             fileAppender.setFile(logFile);
             fileAppender.setEncoder(encoder);
             fileAppender.setRollingPolicy(rollingPolicy);
+
+            // 先设 parent，再 start
             rollingPolicy.setParent(fileAppender);
+            rollingPolicy.start();
             fileAppender.start();
 
             // 添加到 root logger
