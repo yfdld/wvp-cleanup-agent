@@ -87,7 +87,7 @@ public class AgentConfig {
         private String level = "INFO";
         private String file = "./logs/agent.log";
         private int maxHistory = 7;
-        private int maxLogSizeMb = 30;
+        private int maxLogSize = 30;
 
         public String getLevel() { return level; }
         public void setLevel(String level) { this.level = level; }
@@ -95,8 +95,8 @@ public class AgentConfig {
         public void setFile(String file) { this.file = file; }
         public int getMaxHistory() { return maxHistory; }
         public void setMaxHistory(int maxHistory) { this.maxHistory = maxHistory; }
-        public int getMaxLogSizeMb() { return maxLogSizeMb; }
-        public void setMaxLogSizeMb(int maxLogSizeMb) { this.maxLogSizeMb = maxLogSizeMb; }
+        public int getMaxLogSize() { return maxLogSize; }
+        public void setMaxLogSize(int maxLogSize) { this.maxLogSize = maxLogSize; }
     }
 
     /**

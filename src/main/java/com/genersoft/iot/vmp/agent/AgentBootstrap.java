@@ -80,14 +80,14 @@ public class AgentBootstrap {
 
             // 创建 SizeAndTimeBasedRollingPolicy
             String logFile = config.getLog().getFile();
-            String maxLogSize = config.getLog().getMaxLogSizeMb() + "MB";
+            String maxLogSize = config.getLog().getMaxLogSize() + "MB";
             SizeAndTimeBasedRollingPolicy rollingPolicy = new SizeAndTimeBasedRollingPolicy();
             rollingPolicy.setContext(context);
             rollingPolicy.setFileNamePattern(logFile + ".%d{yyyy-MM-dd}.%i");
             rollingPolicy.setMaxFileSize(FileSize.valueOf(maxLogSize));
             rollingPolicy.setMaxHistory(config.getLog().getMaxHistory());
             rollingPolicy.setTotalSizeCap(FileSize.valueOf(
-                    (long) config.getLog().getMaxLogSizeMb() * config.getLog().getMaxHistory() + "MB"));
+                    (long) config.getLog().getMaxLogSize() * config.getLog().getMaxHistory() + "MB"));
             rollingPolicy.setParent(null);
             rollingPolicy.start();
 
